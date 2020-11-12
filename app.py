@@ -1,15 +1,15 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
-
 from flask import Flask,render_template,url_for,request
+import pandas as pd 
+import pickle
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
 
-
+import pickle
 
 # load the model from disk
-
+filename = 'nlp_model.pkl'
+clf = pickle.load(open(filename, 'rb'))
+cv=pickle.load(open('tranform.pkl','rb'))
 app = Flask(__name__)
 
 @app.route('/')
@@ -32,25 +32,19 @@ def predict():
         o=[]
         for i in k:
             for j in uniquee:
-		if j not in i:
-			break
-	    else:
-		o.append(i)
+                if j not in i:
+                    break
+            else:
+                o.append(i)
         min_len=len(o[0])
         for i in o:
-		if len(i)<min_len:
-			min_len=len(i)
-	
+            if len(i)<min_len:
+                min_len=len(i)
+        my_prediction=min_len  
 
-    return render_template('result.html',prediction = min_len)
-
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
-# In[ ]:
+    #     vect = cv.transform(data).toarray()
+    #     my_prediction = clf.predict(vect)
+    return render_template('result.html',prediction = my_prediction)
 
 
 
