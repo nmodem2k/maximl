@@ -28,13 +28,21 @@ def predict():
             for j in range(i+1,len(data)+1):
                 l=data[i:j]
                 k.append(l)
+        uniquee=list(set(data))
         o=[]
         for i in k:
-            q=set(i)
-            o.append(len(q))
-        my_prediction=max(o)  
+            for j in uniquee:
+		if j not in i:
+			break
+	    else:
+		o.append(i)
+        min_len=len(o[0])
+        for i in o:
+		if len(i)<min_len:
+			min_len=len(i)
+	
 
-    return render_template('result.html',prediction = my_prediction)
+    return render_template('result.html',prediction = min_len)
 
 
 
