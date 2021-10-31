@@ -1,4 +1,4 @@
-a=input()
+a=input("Enter the value of a")
 k=[]
 for i in range(0,len(a)):
   for j in range(i+1,len(a)+1):
