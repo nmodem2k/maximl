@@ -31,9 +31,6 @@ def predict():
             if len(i)<min_len:
                 min_len=len(i)
         my_prediction=min_len  
-
-    #     vect = cv.transform(data).toarray()
-    #     my_prediction = clf.predict(vect)
     return render_template('result.html',prediction = my_prediction)
 
 
